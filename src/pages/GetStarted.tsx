@@ -7,7 +7,7 @@ export default function GetStarted() {
   const [objectives, setObjectives] = useState<string[]>(["strength"]);
   const [biometrics, setBiometrics] = useState({ height: "", weight: "", bodyfat: "", heartrate: "" });
   const [enrolled, setEnrolled] = useState(false);
-  const [submitting, setSubmitting] = useState(false);
+
 
   const toggleObjective = (id: string) => {
     setObjectives(prev => 
@@ -18,11 +18,7 @@ export default function GetStarted() {
   const handleEnroll = (e: FormEvent) => {
     e.preventDefault();
     if (!selectedTier || objectives.length === 0) return;
-    setSubmitting(true);
-    setTimeout(() => {
-      setSubmitting(false);
-      setEnrolled(true);
-    }, 1500);
+    setEnrolled(true);
   };
 
   if (enrolled) {
@@ -38,16 +34,16 @@ export default function GetStarted() {
             <PartyPopper className="w-10 h-10" />
           </div>
           <h1 className="text-4xl md:text-6xl font-display font-black uppercase tracking-tighter mb-4">
-            ENROLLMENT <span className="text-primary-container">CONFIRMED</span>
+            DEMO <span className="text-primary-container">COMPLETED</span>
           </h1>
           <p className="text-xs uppercase tracking-widest text-on-surface-variant mb-4 leading-relaxed">
             Protocol: <span className="text-primary-container font-black">{selectedTier.toUpperCase()}</span>
           </p>
           <p className="text-on-surface-variant text-sm mb-12">
-            Your performance director will reach out within 24 hours to schedule your initial biometric assessment.
+            This is an interactive portfolio demonstration. No enrollment was submitted, payment taken, or personal data stored.
           </p>
           <button
-            onClick={() => { setEnrolled(false); setSubmitting(false); }}
+            onClick={() => { setEnrolled(false); }}
             className="text-primary-container text-[10px] font-black uppercase tracking-widest border-b border-primary-container pb-1"
           >
             MODIFY ENROLLMENT
@@ -59,7 +55,8 @@ export default function GetStarted() {
 
   return (
     <div className="bg-background text-on-background min-h-screen">
-      {/* Hero Header */}
+      <p className="text-center px-6 py-4 bg-primary-container/10 text-primary-container text-sm font-bold" role="note">Portfolio demo — enrollment is simulated; no payment or data is submitted.</p>
+      {/* Hero Header */
       <section className="relative py-24 md:py-32 overflow-hidden border-b border-white/5">
         <div className="absolute inset-0 opacity-20">
            <img 
@@ -190,12 +187,12 @@ export default function GetStarted() {
            <motion.button 
              whileHover={{ scale: 0.98 }}
              type="submit"
-             disabled={submitting}
+             
              className="bg-primary-container text-black font-black py-5 px-16 rounded text-[10px] uppercase tracking-widest italic flex items-center gap-2 mx-auto disabled:opacity-60"
            >
-              {submitting ? "PROCESSING..." : "FINALIZE ENROLLMENT"} {!submitting && <ChevronsRight className="w-4 h-4" />}
+              PREVIEW ENROLLMENT <ChevronsRight className="w-4 h-4" />
            </motion.button>
-           <p className="mt-6 text-[8px] font-bold uppercase tracking-widest opacity-40">BY ENROLLING, YOU AGREE TO THE ELITE TERMS OF SERVICE.</p>
+           <p className="mt-6 text-[8px] font-bold uppercase tracking-widest opacity-40">DEMO ONLY — NO ENROLLMENT OR PAYMENT IS PROCESSED.</p>
         </div>
       </form>
     </div>
