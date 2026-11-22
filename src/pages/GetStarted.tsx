@@ -56,7 +56,7 @@ export default function GetStarted() {
   return (
     <div className="bg-background text-on-background min-h-screen">
       <p className="text-center px-6 py-4 bg-primary-container/10 text-primary-container text-sm font-bold" role="note">Portfolio demo — enrollment is simulated; no payment or data is submitted.</p>
-      {/* Hero Header */
+      {/* Hero Header */}
       <section className="relative py-24 md:py-32 overflow-hidden border-b border-white/5">
         <div className="absolute inset-0 opacity-20">
            <img 
