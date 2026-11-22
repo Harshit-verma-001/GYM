@@ -1,20 +1,31 @@
-<div align="center">
-<img width="1200" height="475" alt="GHBanner" src="https://github.com/user-attachments/assets/0aa67016-6eaf-458a-adb2-6e31a0763ed6" />
-</div>
+# FiTusion — Fitness Website Portfolio Demo
 
-# Run and deploy your AI Studio app
+A responsive React + Vite + TypeScript fitness website concept featuring interactive navigation, animations, a contact-form preview, and a simulated membership flow.
 
-This contains everything you need to run your app locally.
+**Important:** This is a fictional portfolio demo, not a real gym. Contact details, locations, membership prices, and enrollment flows are illustrative. Forms do not transmit or store user information, and no payment is collected.
 
-View your app in AI Studio: https://ai.studio/apps/e47b59ee-676d-43e3-a038-35dc0a483833
+## Run locally
 
-## Run Locally
+Requires Node.js 20.19+ or 22.12+.
 
-**Prerequisites:**  Node.js
+```bash
+npm ci
+npm run lint
+npm run build
+npm run dev
+```
 
+## Deploy to Vercel
 
-1. Install dependencies:
-   `npm install`
-2. Set the `GEMINI_API_KEY` in [.env.local](.env.local) to your Gemini API key
-3. Run the app:
-   `npm run dev`
+1. Import this GitHub repository into Vercel.
+2. Set framework to **Vite**, build command to `npm run build`, and output directory to `dist`.
+3. No environment variables are needed.
+4. Deploy and test direct visits to `/about`, `/contact`, and `/get-started` (SPA rewrites are provided in `vercel.json`).
+
+## Before adapting for a real client
+
+Replace all fictional gym contact information, claims, prices, and location references with verified business details. Connect forms to a secure backend or approved form provider with validation, spam protection, privacy disclosures, and real delivery confirmation. Do not collect health or biometric data without appropriate protections and consent.
+
+## Security
+
+Do not add secret API keys to client-side Vite environment variables or `define` options.
