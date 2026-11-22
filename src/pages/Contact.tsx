@@ -42,7 +42,7 @@ export default function Contact() {
       </section>
 
       <p className="text-center px-6 py-4 bg-primary-container/10 text-primary-container text-sm font-bold" role="note">Portfolio demo — sample business details and forms only. No enquiries are transmitted.</p>
-      {/* Main Content */
+      {/* Main Content */}
       <section className="py-24 md:py-32">
         <div className="container mx-auto px-8 max-w-6xl">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-24">
