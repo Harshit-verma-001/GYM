@@ -1,8 +1,11 @@
 import { motion } from "motion/react";
 import { Play, Info, Dumbbell, Zap, Activity, Filter, Search, ChevronRight } from "lucide-react";
 import ScrollReveal from "../components/ScrollReveal";
+import { useMemo, useState } from "react";
 
 export default function Exercise() {
+  const [category, setCategory] = useState("All");
+  const [search, setSearch] = useState("");
   const exercises = [
     { title: "Barbell Back Squat", level: "Advanced", muscle: "Quads/Glutes", type: "Strength", img: "https://lh3.googleusercontent.com/aida-public/AB6AXuB9P_RlpXWkz8WJ-c5UHNHsHLSrFF9lv_zgaQ2IPSb5SH2JOjUHtKYRVS5M-7mu0HBAI8pFXkuPd5a0m7O9pqMBtKtRJjlQh_mbuFYFS2tmlrK4JChzcZErDJiPzI6XJ2myvgtq3jKOT9sksZn_htWcFzZ3wBIqREyjTyGRpFr9eC5NWzHqtqQtP03QhHAXCe-dQelnqY8c8yga6uWuPY9VRSmQwrIH_-75JWRzG4fbhB5cClim9tO6D7SRK67285NglXH2zSMeGfdl" },
     { title: "Kettlebell Swing", level: "Intermediate", muscle: "Posterior Chain", type: "Functional", img: "https://lh3.googleusercontent.com/aida-public/AB6AXuBNeNMdRuPDYBkkj4S-2NZQHKhjfKV2li5LKHu277q5OiMhGUM2OY8u4FvsgXDzHh82_NM3eEPO96ynzKdFt3zuPc-fDRGhRPMxSojiZtv3Doa7tW78YuAYfxXWA8HCgSwaTb5dHPCSesJdnSCYKsi9kApJULBKv-BAgP8Pjqr_-4qgclB8tgD6T9Zc4B5uJf3Zoibsh9yvEG7EQZo-vlAeUlsO1xRbBbwZzMYtWAEaJDIwNM06wI3dA4sCIjDcEU1oFW3o2hioACh4" },
@@ -11,6 +14,8 @@ export default function Exercise() {
     { title: "Deadlift Max", level: "Elite", muscle: "Total Body", type: "Strength", img: "https://lh3.googleusercontent.com/aida-public/AB6AXuAQn4f0IGrKoGRIUemV217IwdmDqPC0q3nexoG57ULuy8suANoSHRjgGiXhNF4eekej1cuL_KlR9kEwQa5ifBrPISBQgW3M86Kz6qjiDaNXVzVxqm3rc5B7NhPtk8mzUMXo2Y_PhoApG4lI6eZwQNbhUD9hhCPT2IxLMffJV-RcAOAuXFguRkOBlohglzCip_eLjy78DfrcXTxEcuuOUNsRGS9nWIbiNN1SqqAbnLLjGD7YTscWZ83AYpFbcUAM6Edf7hqmFO9FUqgZ" },
     { title: "Mobility Flow", level: "Any", muscle: "Joints", type: "Recovery", img: "https://lh3.googleusercontent.com/aida-public/AB6AXuDWR8bC-8zvDk85bxsZVDLKRcB3HWinOxcTJV1KzcUd4IvcNCnF74CVqWDuq4Xpt2u8kYUoKAIoGalnBdIkfV-atGka0tOK_IUb9NdbGDMf1T_OM876R5H0um2vL4gnpjc8H9XYXv9wJxvlnmw-y-8_YkcxMJ2kP_oOHLQeMOAxKCBM0lSfabMCIHt7NjtENYW5ez9xybH1XbAqBgdsHMFMml56d-wNeslERnJlEzakye8tr5YiHZFbyOKJollRP3q5swTNz76nfvuy" }
   ];
+
+  const filtered = useMemo(() => exercises.filter(ex => (category === "All" || ex.type === category) && `${ex.title} ${ex.level} ${ex.muscle} ${ex.type}`.toLowerCase().includes(search.toLowerCase().trim())), [category, search]);
 
   return (
     <div className="overflow-x-hidden">
@@ -43,8 +48,8 @@ export default function Exercise() {
       <section className="py-12 bg-surface-container-low border-b border-white/5">
         <ScrollReveal y={20} className="container mx-auto px-8 flex flex-col md:flex-row justify-between items-center gap-8">
            <div className="flex gap-4 overflow-x-auto no-scrollbar pb-2 md:pb-0">
-              {["All", "Strength", "Handwork", "Core", "Recovery", "Mobility"].map((cat) => (
-                <button key={cat} className={`px-6 py-2 rounded-full text-[10px] font-black uppercase tracking-widest whitespace-nowrap transition-all ${cat === 'All' ? 'bg-primary-container text-black' : 'border border-white/10 hover:border-primary-container'}`}>
+              {["All", "Strength", "Functional", "Cardio", "Bodyweight", "Recovery"].map((cat) => (
+                <button key={cat} onClick={() => setCategory(cat)} aria-pressed={category === cat} className={`px-6 py-2 rounded-full text-[10px] font-black uppercase tracking-widest whitespace-nowrap transition-all ${category === cat ? 'bg-primary-container text-black' : 'border border-white/10 hover:border-primary-container'}`}>
                    {cat}
                 </button>
               ))}
@@ -53,7 +58,10 @@ export default function Exercise() {
               <Search className="absolute left-6 top-1/2 -translate-y-1/2 w-4 h-4 opacity-40" />
               <input 
                 type="text" 
-                placeholder="SEARCH MOVEMENTS..." 
+                placeholder="SEARCH MOVEMENTS..."
+                aria-label="Search exercises"
+                value={search}
+                onChange={e => setSearch(e.target.value)} 
                 className="w-full bg-white/5 border border-white/10 rounded-full px-14 py-3 text-[10px] font-bold uppercase tracking-widest focus:outline-none focus:border-primary-container"
               />
            </div>
@@ -64,7 +72,7 @@ export default function Exercise() {
       <section className="py-24">
         <div className="container mx-auto px-8">
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {exercises.map((ex, i) => (
+            {filtered.map((ex, i) => (
               <ScrollReveal y={30} delay={i * 0.1} key={i} className="group relative rounded-2xl overflow-hidden bg-surface-container border border-white/5 hover:border-primary-container/30 transition-all flex flex-col h-full">
                 <div className="aspect-video relative overflow-hidden">
                    <img className="w-full h-full object-cover filter grayscale group-hover:grayscale-0 group-hover:scale-105 transition-all duration-700" src={ex.img} alt={ex.title} />
@@ -98,11 +106,7 @@ export default function Exercise() {
             ))}
           </div>
 
-          <div className="mt-24 text-center">
-             <button className="border-b-2 border-primary-container pb-2 font-display font-black text-xs uppercase tracking-widest hover:text-primary-container transition-colors">
-                LOAD MORE MOVEMENTS
-             </button>
-          </div>
+          <p className="mt-12 text-center text-sm text-on-surface-variant" role="status">Showing {filtered.length} of {exercises.length} movements{filtered.length === 0 ? " — try a different search or filter." : "."}</p>
         </div>
       </section>
 
@@ -120,7 +124,7 @@ export default function Exercise() {
                 <div className="absolute inset-0 flex items-center justify-center">
                    <div className="hud-stats px-6 py-3 rounded-lg border border-primary-container/30">
                       <span className="text-primary-container text-[10px] font-black uppercase tracking-widest flex items-center gap-2">
-                         <Zap className="w-4 h-4 fill-current" /> AI JOINT SCAN ACTIVE
+                         <Zap className="w-4 h-4 fill-current" /> CONCEPT FEATURE — NOT ACTIVE
                       </span>
                    </div>
                 </div>
@@ -130,7 +134,7 @@ export default function Exercise() {
              <span className="text-primary-container text-[10px] font-bold uppercase tracking-[0.4em] mb-4 block">BIOMECHANICAL ACCURACY</span>
              <h2 className="text-5xl font-display font-black mb-8 leading-tight">MASTER EVERY <span className="italic text-primary-container">ANGLE</span></h2>
              <p className="text-lg text-on-surface-variant mb-12 leading-relaxed">
-                Connect your camera for real-time form correction. Our vision AI tracks 32 biomechanical markers to ensure triple extension, spinal neutrality, and optimal force distribution.
+                Concept preview: a future camera-based form feedback experience. This demonstration does not access your camera or perform AI joint analysis.
              </p>
              <ul className="space-y-6">
                 {[
