@@ -1,6 +1,6 @@
 import { motion } from "motion/react";
 import { ChevronsRight, Utensils, User, Activity, Zap, Dumbbell, Flame, ArrowRight, Heart, Footprints, CheckCircle2 } from "lucide-react";
-import { useState, FormEvent, useEffect, useRef } from "react";
+import { useEffect, useRef } from "react";
 import { useNavigate } from "react-router-dom";
 import CountUp from "react-countup";
 import gsap from "gsap";
@@ -11,16 +11,8 @@ gsap.registerPlugin(ScrollTrigger);
 
 export default function Home() {
   const navigate = useNavigate();
-  const [ctaEmail, setCtaEmail] = useState("");
-  const [ctaSubmitted, setCtaSubmitted] = useState(false);
   const heroRef = useRef<HTMLElement>(null);
 
-  const handleCtaSubmit = (e: FormEvent) => {
-    e.preventDefault();
-    if (!ctaEmail) return;
-    setCtaSubmitted(true);
-    setCtaEmail("");
-  };
 
   // Hero parallax effect
   useEffect(() => {
@@ -74,8 +66,8 @@ export default function Home() {
                 Let's Start
                 <ChevronsRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
               </motion.button>
-              <button onClick={() => navigate('/exercise')} className="border border-white/20 hover:border-primary-container text-white font-bold py-4 px-10 rounded-full text-lg transition-colors">
-                View Classes
+              <button onClick={() => navigate('/workout-builder')} className="border border-white/20 hover:border-primary-container text-white font-bold py-4 px-10 rounded-full text-lg transition-colors">
+                Try Workout Builder
               </button>
             </div>
           </motion.div>
@@ -313,19 +305,10 @@ export default function Home() {
         <div className="container mx-auto px-8 text-center relative z-10">
           <h2 className="text-6xl md:text-8xl font-display font-black mb-8 leading-tight">Connect Engage <br/><span className="text-primary-container">Transform</span></h2>
           <p className="text-lg text-on-surface-variant max-w-xl mx-auto mb-12">
-            Join our community of performance seekers. Get the latest training protocols and nutrition hacks delivered to your inbox.
+            Explore an interactive fitness experience: choose your training goal and build a sample workout in seconds.
           </p>
-          {ctaSubmitted ? (
-            <motion.div initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} className="flex items-center justify-center gap-3 text-primary-container">
-              <CheckCircle2 className="w-6 h-6" />
-              <span className="font-display font-bold text-lg">Welcome to the FiTusion community!</span>
-            </motion.div>
-          ) : (
-          <form className="max-w-xl mx-auto flex flex-col md:flex-row gap-4" onSubmit={handleCtaSubmit}>
-            <input className="flex-grow bg-white/5 border border-white/10 rounded-full px-8 py-4 focus:outline-none focus:border-primary-container" placeholder="Your Email Address" type="email" required value={ctaEmail} onChange={(e) => setCtaEmail(e.target.value)} />
-            <button type="submit" className="bg-primary-container text-on-primary-fixed font-bold py-4 px-10 rounded-full hover:scale-95 transition-transform whitespace-nowrap">Join Now</button>
-          </form>
-          )}
+          <button onClick={() => navigate('/workout-builder')} className="bg-primary-container text-black font-black py-4 px-10 rounded-full hover:scale-95 transition-transform">Build a sample workout →</button>
+          <p className="mt-6 text-xs text-on-surface-variant">Interactive portfolio demo — no signup or email collection.</p>
         </div>
         <div className="absolute inset-0 flex items-center justify-center opacity-5 pointer-events-none">
           <span className="text-[30vw] font-black leading-none text-outline select-none">FUSION</span>
