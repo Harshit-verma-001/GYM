@@ -73,7 +73,7 @@ export default function Exercise() {
         <div className="container mx-auto px-8">
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
             {filtered.map((ex, i) => (
-              <ScrollReveal y={30} delay={i * 0.1} key={i} className="group relative rounded-2xl overflow-hidden bg-surface-container border border-white/5 hover:border-primary-container/30 transition-all flex flex-col h-full">
+              <ScrollReveal y={30} delay={i * 0.1} className="group relative rounded-2xl overflow-hidden bg-surface-container border border-white/5 hover:border-primary-container/30 transition-all flex flex-col h-full">
                 <div className="aspect-video relative overflow-hidden">
                    <img className="w-full h-full object-cover filter grayscale group-hover:grayscale-0 group-hover:scale-105 transition-all duration-700" src={ex.img} alt={ex.title} />
                    <div className="absolute inset-0 bg-black/20 group-hover:bg-transparent transition-colors"></div>
