@@ -187,12 +187,12 @@ export default function GetStarted() {
            <motion.button 
              whileHover={{ scale: 0.98 }}
              type="submit"
-             disabled={submitting}
+             
              className="bg-primary-container text-black font-black py-5 px-16 rounded text-[10px] uppercase tracking-widest italic flex items-center gap-2 mx-auto disabled:opacity-60"
            >
-              {submitting ? "PROCESSING..." : "FINALIZE ENROLLMENT"} {!submitting && <ChevronsRight className="w-4 h-4" />}
+              PREVIEW ENROLLMENT <ChevronsRight className="w-4 h-4" />
            </motion.button>
-           <p className="mt-6 text-[8px] font-bold uppercase tracking-widest opacity-40">BY ENROLLING, YOU AGREE TO THE ELITE TERMS OF SERVICE.</p>
+           <p className="mt-6 text-[8px] font-bold uppercase tracking-widest opacity-40">DEMO ONLY — NO ENROLLMENT OR PAYMENT IS PROCESSED.</p>
         </div>
       </form>
     </div>
