@@ -15,6 +15,7 @@ export default function Navbar() {
     { name: "Service", path: "/service" },
     { name: "Exercise", path: "/exercise" },
     { name: "Workout Builder", path: "/workout-builder" },
+    { name: "Business Demo", path: "/gym-business" },
   ];
 
   const closeMobile = () => setMobileOpen(false);
