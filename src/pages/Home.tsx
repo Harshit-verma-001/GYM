@@ -66,8 +66,8 @@ export default function Home() {
                 Let's Start
                 <ChevronsRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
               </motion.button>
-              <button onClick={() => navigate('/workout-builder')} className="border border-white/20 hover:border-primary-container text-white font-bold py-4 px-10 rounded-full text-lg transition-colors">
-                Try Workout Builder
+              <button onClick={() => navigate('/gym-business')} className="border border-white/20 hover:border-primary-container text-white font-bold py-4 px-10 rounded-full text-lg transition-colors">
+                Explore Gym Business Demo
               </button>
             </div>
           </motion.div>
