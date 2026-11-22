@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useState } from "react";
+import { useEffect, useMemo, useState, type FormEvent } from "react";
 import { Link } from "react-router-dom";
 import { CalendarDays, Check, Clock3, CreditCard, Dumbbell, MessageCircle, ShieldAlert, TrendingUp, Users } from "lucide-react";
 
@@ -38,9 +38,9 @@ export default function GymBusiness() {
   useEffect(()=>write("members",members),[members]);
   const occupied = (name:string,date:string)=>bookings.filter(b=>b.className===name&&b.date===date).length;
   const stats = useMemo(()=>({leads:leads.length,new:leads.filter(l=>l.status==="new").length,converted:leads.filter(l=>l.status==="converted").length,bookings:bookings.length,members:members.length}),[leads,bookings,members]);
-  const addLead=(e:React.FormEvent)=>{e.preventDefault();if(trial.date<today()){setMessage("Choose a future date.");return;}setLeads(prev=>[{...trial,id:id(),status:"new",createdAt:new Date().toISOString()},...prev]);setMessage("Demo request recorded in this browser. Open Owner Dashboard to review it.");setTrial({name:"",email:"",phone:"",date:plusDays(1),time:"10:00",interest:"Free gym tour"});};
-  const addBooking=(e:React.FormEvent)=>{e.preventDefault();const cls=classes.find(c=>c.name===classForm.className)!;if(classForm.date<today()){setMessage("Choose a future date.");return;}if(occupied(cls.name,classForm.date)>=cls.capacity){setMessage("This demo class is full. Choose another class or date.");return;}setBookings(prev=>[{...classForm,id:id()},...prev]);setMessage("Demo class reservation saved in this browser.");setClassForm({name:"",email:"",phone:"",date:plusDays(1),className:"Strength Lab"});};
-  const addMember=(e:React.FormEvent)=>{e.preventDefault();const renewal=new Date();renewal.setMonth(renewal.getMonth()+Number(renewalPeriod));setMembers(prev=>[{id:id(),name:memberName,plan:memberPlan,joined:today(),renewal:renewal.toLocaleDateString("en-CA"),sessions:0},...prev]);setMemberName("");setMessage("Demo member added. No payment was charged.");};
+  const addLead=(e:FormEvent)=>{e.preventDefault();if(trial.date<today()){setMessage("Choose a future date.");return;}setLeads(prev=>[{...trial,id:id(),status:"new",createdAt:new Date().toISOString()},...prev]);setMessage("Demo request recorded in this browser. Open Owner Dashboard to review it.");setTrial({name:"",email:"",phone:"",date:plusDays(1),time:"10:00",interest:"Free gym tour"});};
+  const addBooking=(e:FormEvent)=>{e.preventDefault();const cls=classes.find(c=>c.name===classForm.className)!;if(classForm.date<today()){setMessage("Choose a future date.");return;}if(occupied(cls.name,classForm.date)>=cls.capacity){setMessage("This demo class is full. Choose another class or date.");return;}setBookings(prev=>[{...classForm,id:id()},...prev]);setMessage("Demo class reservation saved in this browser.");setClassForm({name:"",email:"",phone:"",date:plusDays(1),className:"Strength Lab"});};
+  const addMember=(e:FormEvent)=>{e.preventDefault();const renewal=new Date();renewal.setMonth(renewal.getMonth()+Number(renewalPeriod));setMembers(prev=>[{id:id(),name:memberName,plan:memberPlan,joined:today(),renewal:renewal.toLocaleDateString("en-CA"),sessions:0},...prev]);setMemberName("");setMessage("Demo member added. No payment was charged.");};
   const changeLead=(leadId:string,status:Lead["status"])=>setLeads(prev=>prev.map(l=>l.id===leadId?{...l,status}:l));
   const choosePlan=(name:string)=>{setTrial(t=>({...t,interest:name+" membership"}));setTab("trial");setMessage("");};
   const nav=[{key:"plans",label:"Memberships"},{key:"trial",label:"Free trial"},{key:"classes",label:"Class booking"},{key:"dashboard",label:"Owner dashboard"},{key:"members",label:"Members"}] as const;
