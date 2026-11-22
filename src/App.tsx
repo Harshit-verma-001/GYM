@@ -9,6 +9,7 @@ import Exercise from "./pages/Exercise";
 import GetStarted from "./pages/GetStarted";
 import Contact from "./pages/Contact";
 import NotFound from "./pages/NotFound";
+import WorkoutBuilder from "./pages/WorkoutBuilder";
 
 export default function App() {
   return (
@@ -21,6 +22,7 @@ export default function App() {
           <Route path="/features" element={<Features />} />
           <Route path="/service" element={<Service />} />
           <Route path="/exercise" element={<Exercise />} />
+          <Route path="/workout-builder" element={<WorkoutBuilder />} />
           <Route path="/get-started" element={<GetStarted />} />
           <Route path="/contact" element={<Contact />} />
           <Route path="*" element={<NotFound />} />
